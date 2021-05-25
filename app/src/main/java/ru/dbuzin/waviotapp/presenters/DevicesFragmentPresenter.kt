@@ -13,6 +13,8 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 import ru.dbuzin.waviotapp.api.LkApi
 import ru.dbuzin.waviotapp.app.App
+import ru.dbuzin.waviotapp.models.Device
+import ru.dbuzin.waviotapp.models.Devices
 import ru.dbuzin.waviotapp.views.DevicesFragmentView
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -43,13 +45,15 @@ class DevicesFragmentPresenter: MvpPresenter<DevicesFragmentView>() {
                         lkApi.getFullElementInfo(elementId.toLong())
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(object : MaybeObserver<ResponseBody>{
+                                .subscribe(object : MaybeObserver<Devices>{
                                     override fun onSubscribe(d: Disposable) {
 
                                     }
 
-                                    override fun onSuccess(t: ResponseBody) {
-                                        
+                                    override fun onSuccess(t: Devices) {
+                                        var devicesList: MutableList<Device> = mutableListOf()
+                                        t.devicesMap.forEach{(_, v) -> devicesList.add(v)}
+                                        viewState.onSuccess(devicesList)
                                     }
 
                                     override fun onError(e: Throwable) {

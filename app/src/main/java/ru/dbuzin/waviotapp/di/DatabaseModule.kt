@@ -15,6 +15,7 @@ class DatabaseModule(mApplication: Application?) {
     private var appDatabase : AppDatabase =
         Room.databaseBuilder(mApplication!!, AppDatabase::class.java, "dbWaviot")
             .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
+            .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
 

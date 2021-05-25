@@ -27,11 +27,8 @@ class AddCookiesInterceptor: Interceptor {
     @SuppressLint("CheckResult")
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
-        cookiesDao.getAll()
-            .subscribeOn(Schedulers.io())
-            .subscribe { cookies ->
-            builder.addHeader("Cookie", "WAVIOT_JWT=" + cookies.jwt)
-        }
+        builder.addHeader("Cookie", "WAVIOT_JWT=" + cookiesDao.getAll().jwt)
+        print("Interceptor" + Thread.currentThread().name)
         return chain.proceed(builder.build())
     }
 }

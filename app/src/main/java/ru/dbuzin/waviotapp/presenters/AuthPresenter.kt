@@ -69,13 +69,14 @@ class AuthPresenter() : MvpPresenter<AuthView>() {
 
     @SuppressLint("CheckResult")
     fun isAuthorized() {
-        cookiesDao.getAll()
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe { cookies ->
-                if (!cookies!!.equals(null)) {
-                    viewState.onSuccess()
-                }
-            }
+        if(!cookiesDao.getAll().equals(null))
+            viewState.onSuccess()
+//            ?.subscribeOn(Schedulers.io())
+//            ?.observeOn(AndroidSchedulers.mainThread())
+//            ?.subscribe { cookies ->
+//                if (!cookies!!.equals(null)) {
+//                    viewState.onSuccess()
+//                }
+//            }
     }
 }

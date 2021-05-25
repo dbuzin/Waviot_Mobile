@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="ru.dbuzin.waviotapp.fragments.DevicesFragment"
-        android:label="@string/menu_home"
+        android:label="@string/devices"
         tools:layout="@layout/fragment_devices" />
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="ru.dbuzin.waviotapp.fragments.SupportFragment"
-        android:label="b"
+        android:label="@string/support"
         tools:layout="@layout/fragment_support" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="ru.dbuzin.waviotapp.fragments.AccountFragment"
-        android:label="c"
+        android:label="@string/account"
         tools:layout="@layout/fragment_account" />
 </navigation>
